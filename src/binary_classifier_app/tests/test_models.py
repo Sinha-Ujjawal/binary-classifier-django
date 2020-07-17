@@ -11,3 +11,5 @@ class BinaryClassifierModelTest(TestCase):
             model=dummy_model, is_training=False, is_deleted=True,
         )
         obj.save()
+
+        print(BinaryClassifierModel.objects.all())

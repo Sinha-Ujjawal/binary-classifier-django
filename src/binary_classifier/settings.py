@@ -113,9 +113,17 @@ WSGI_APPLICATION = "binary_classifier.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    # }
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.getenv("POSTGRES_DB_NAME") or "binary_classifier",
+        "USER": os.getenv("POSTGRES_DB_USER") or "binary_classifier",
+        "PASSWORD": os.getenv("POSTGRES_DB_PASSWORD") or "password",
+        "HOST": os.getenv("POSTGRES_DB_HOST") or "localhost",
+        "PORT": os.getenv("POSTGRES_DB_PORT") or "5432",
     }
 }
 
