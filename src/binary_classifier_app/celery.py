@@ -4,9 +4,6 @@ import os
 
 from celery import Celery
 
-# set the default Django settings module for the 'celery' program.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "binary_classifier.settings")
-
 app = Celery("binary_classifier")
 
 # Using a string here means the worker doesn't have to serialize

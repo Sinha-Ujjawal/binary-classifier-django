@@ -1,1 +1,2 @@
 from .binary_classifier_model import BinaryClassifierModel
+from .training_data_model import TrainingDataModel

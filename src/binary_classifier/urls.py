@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from binary_classifier_app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("train", views.TrainBinaryClassifierView.as_view()),
+    path("test", views.TestBinaryClassifierView.as_view()),
 ]
