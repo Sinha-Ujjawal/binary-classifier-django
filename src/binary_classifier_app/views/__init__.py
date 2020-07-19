@@ -1,1 +1,1 @@
-from .classifier_model_views import *
+from .classifier import *

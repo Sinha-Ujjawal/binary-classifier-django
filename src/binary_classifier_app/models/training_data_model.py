@@ -20,7 +20,7 @@ class TrainingDataModel(models.Model):
         parent_link=True,
         related_name="training_data",
     )
-    x = models.DecimalField(decimal_places=4, max_digits=5)
-    y = models.DecimalField(decimal_places=4, max_digits=5)
+    x = models.DecimalField(decimal_places=4, max_digits=10)
+    y = models.DecimalField(decimal_places=4, max_digits=10)
     label = models.BooleanField()
     crte_ts = models.DateTimeField(auto_now=True)

@@ -19,6 +19,8 @@ from binary_classifier_app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("train", views.TrainBinaryClassifierView.as_view()),
-    path("test", views.TestBinaryClassifierView.as_view()),
+    path("train", views.Train.as_view()),
+    path("test", views.Test.as_view()),
+    path("decisionBoundary", views.DecisionBoundary.as_view()),
+    path("models", views.ModelIds.as_view()),
 ]
