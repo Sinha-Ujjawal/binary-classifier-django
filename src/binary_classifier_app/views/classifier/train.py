@@ -79,8 +79,8 @@ class Train(APIView):
 
     def post(self, request, format=None):
         type_0, type_1 = request.data["plotPoints"]
-        model_type = request.data["modelType"]
-        model_args = request.data["modelArgs"]
+        model_type = request.data.get("modelType", "dummy")
+        model_args = request.data.get("modelArgs", {})
 
         LOGGER.info(f"Training model on datapoints: type_0: {type_0}, type_1: {type_1}")
         LOGGER.info(f"Model type: {model_type}")
@@ -96,4 +96,10 @@ class Train(APIView):
         self.create_dataset(binary_classifier, type_0, type_1)
         LOGGER.info("Training data saved!")
 
-        return Response({"modelId": binary_classifier.model_id})
+        return Response(
+            {
+                "modelId": binary_classifier.model_id,
+                "modelType": model_type,
+                "modelArgs": model_args,
+            }
+        )

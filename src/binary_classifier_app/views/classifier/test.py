@@ -19,9 +19,7 @@ class Test(APIView):
         y = json_data["y"]
 
         LOGGER.info(f"Retrieving model for model_id: {model_id} ...")
-        binary_classifier = BinaryClassifierModel.objects.filter(is_deleted=False).get(
-            model_id=model_id
-        )
+        binary_classifier = BinaryClassifierModel.objects.get(model_id=model_id)
         LOGGER.info("Model retrieved!")
 
         LOGGER.info(f"Predicting the label for data point: x: {x}, y: {y}")

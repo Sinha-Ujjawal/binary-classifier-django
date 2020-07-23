@@ -2,7 +2,7 @@ from typing import Dict, Any, Callable
 
 from sklearn.base import BaseEstimator
 from sklearn.dummy import DummyClassifier
-from . import logistic
+from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -15,14 +15,15 @@ from sklearn.neural_network import MLPClassifier
 def init_classifier_store() -> Callable[[str, Dict[str, Any]], BaseEstimator]:
     classifier_factory = {
         "dummy": DummyClassifier,
-        "logistic": logistic.get_model
-        # "svm": SVC,
-        # "naive bayes": GaussianNB,
-        # "knn": KNeighborsClassifier,
-        # "rnn": RandomForestClassifier,
-        # "decission tree": DecisionTreeClassifier,
-        # "random forest": RandomForestClassifier,
-        # "neural network": MLPClassifier,
+        "logistic": LogisticRegression,
+        "logisticCV": LogisticRegressionCV,
+        "svm": SVC,
+        "naive bayes": GaussianNB,
+        "knn": KNeighborsClassifier,
+        "rnn": RadiusNeighborsClassifier,
+        "decission tree": DecisionTreeClassifier,
+        "random forest": RandomForestClassifier,
+        "neural network": MLPClassifier,
     }
 
     def apply(model_type: str, model_args: Dict[str, Any]) -> BaseEstimator:

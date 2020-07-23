@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView, Response
 import numpy as np
 from ...base_logger import BASE_LOGGER
@@ -18,14 +19,7 @@ X = init_X()
 
 
 class DecisionBoundary(APIView):
-    def post(self, request, format=None):
-        # {
-        #     "modelId":,
-        # }
-        json_data = request.data
-
-        model_id = json_data["modelId"]
-
+    def get(self, request, model_id: int, format=None):
         LOGGER.info(f"Retrieving model for model_id: {model_id} ...")
         binary_classifier = BinaryClassifierModel.objects.get(model_id=model_id)
         LOGGER.info("Model retrieved!")
@@ -43,4 +37,4 @@ class DecisionBoundary(APIView):
             else:
                 type_1.append(point)
 
-        return Response({**json_data, **{"plotPoints": [type_0, type_1]}})
+        return Response({"modelId": model_id, "plotPoints": [type_0, type_1]})

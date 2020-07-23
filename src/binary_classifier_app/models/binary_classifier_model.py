@@ -10,7 +10,6 @@ class BinaryClassifierModel(models.Model):
                 "model": self.model,
                 "standard_scaler": self.standard_scaler,
                 "is_training": self.is_training,
-                "is_deleted": self.is_deleted,
                 "crte_ts": self.crte_ts,
             }
         )
@@ -20,6 +19,5 @@ class BinaryClassifierModel(models.Model):
     standard_scaler = PickledObjectField(default="")
 
     is_training = models.BooleanField(default=True)
-    is_deleted = models.BooleanField(default=False)
 
     crte_ts = models.DateTimeField(auto_now=True)

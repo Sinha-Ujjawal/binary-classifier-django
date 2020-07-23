@@ -10,12 +10,12 @@ def save_dummy_classifier() -> BinaryClassifierModel:
     from sklearn.dummy import DummyClassifier
 
     dummy_model = DummyClassifier()
-    obj = BinaryClassifierModel(model=dummy_model, is_training=False, is_deleted=True,)
+    obj = BinaryClassifierModel(model=dummy_model)
     obj.save()
     return obj
 
 
-class BinaryClassifierModelTest(TransactionTestCase):
+class BinaryClassifierModel_Test(TransactionTestCase):
     def setUp(self):
         save_dummy_classifier()
 
@@ -23,7 +23,7 @@ class BinaryClassifierModelTest(TransactionTestCase):
         print(BinaryClassifierModel.objects.all())
 
 
-class TrainingDataModelTest(TransactionTestCase):
+class TrainingDataModel_Test(TransactionTestCase):
     def setUp(self):
         self.model = model = save_dummy_classifier()
         points = [[0.45, 0.78], [4.56, 1.345], [4.5, -6.7]]

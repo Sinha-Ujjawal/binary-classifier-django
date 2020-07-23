@@ -15,12 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.schemas import get_schema_view
 from binary_classifier_app import views
 
+schema_view = get_schema_view(
+    title="Binary Classifier", description="Served APIs", version="1.0.0"
+)
+
 urlpatterns = [
+    path("", schema_view),
     path("admin/", admin.site.urls),
-    path("train", views.Train.as_view()),
-    path("test", views.Test.as_view()),
-    path("decisionBoundary", views.DecisionBoundary.as_view()),
-    path("models", views.ModelIds.as_view()),
+    path("classifier/train", views.Train.as_view()),
+    path("classifier/test", views.Test.as_view()),
+    path(
+        "classifier/decisionBoundary/<int:model_id>", views.DecisionBoundary.as_view()
+    ),
+    path("classifier/models", views.ModelIds.as_view()),
+    path("classifier/deleteModel/<int:model_id>", views.DeleteModel.as_view()),
 ]
