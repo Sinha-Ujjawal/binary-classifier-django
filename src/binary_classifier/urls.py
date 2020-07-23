@@ -14,9 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from rest_framework.schemas import get_schema_view
-from binary_classifier_app import views
 
 schema_view = get_schema_view(
     title="Binary Classifier", description="Served APIs", version="1.0.0"
@@ -25,11 +24,5 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("", schema_view),
     path("admin/", admin.site.urls),
-    path("classifier/train", views.Train.as_view()),
-    path("classifier/test", views.Test.as_view()),
-    path(
-        "classifier/decisionBoundary/<int:model_id>", views.DecisionBoundary.as_view()
-    ),
-    path("classifier/models", views.ModelIds.as_view()),
-    path("classifier/deleteModel/<int:model_id>", views.DeleteModel.as_view()),
+    path("classifier/", include("binary_classifier_app.urls")),
 ]
