@@ -1,8 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView, Response
 import numpy as np
+from ...selectors import get_binary_classifier_model
 from ...base_logger import BASE_LOGGER
-from ...models import BinaryClassifierModel
 
 LOGGER = BASE_LOGGER.getChild("views.classifier.decission_boundary")
 
@@ -21,12 +21,12 @@ X = init_X()
 class DecisionBoundary(APIView):
     def get(self, request, model_id: int, format=None):
         LOGGER.info(f"Retrieving model for model_id: {model_id} ...")
-        binary_classifier = BinaryClassifierModel.objects.get(model_id=model_id)
+        model = get_binary_classifier_model(model_id=model_id).model
         LOGGER.info("Model retrieved!")
 
         LOGGER.info("Predicting the labels for the mesh")
-        X_transformed = binary_classifier.standard_scaler.transform(X)
-        labels = binary_classifier.model.predict(X_transformed)
+        X_transformed = model.scaler.transform(X)
+        labels = model.clf.predict(X_transformed)
         LOGGER.info("Labels predicted")
 
         type_0 = []

@@ -37,3 +37,5 @@ def init_classifier_store() -> Callable[[str, Dict[str, Any]], BaseEstimator]:
 
 
 classifier_store = init_classifier_store()
+
+del init_classifier_store

@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView, Response
+from ...services import delete_binary_classifier
 from ...base_logger import BASE_LOGGER
-from ...models import BinaryClassifierModel
 
 LOGGER = BASE_LOGGER.getChild("views.classifier.delete_model")
 
@@ -11,8 +11,7 @@ class DeleteModel(APIView):
         status = None
         try:
             LOGGER.info(f"Deleting model with model_id: {model_id} ...")
-            binary_classifier = BinaryClassifierModel.objects.get(model_id=model_id)
-            binary_classifier.delete()
+            delete_binary_classifier(model_id=model_id)
             LOGGER.info("Model deleted!")
             status = "DELETED"
         except ObjectDoesNotExist:

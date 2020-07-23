@@ -8,7 +8,6 @@ class BinaryClassifierModel(models.Model):
             {
                 "model_id": self.model_id,
                 "model": self.model,
-                "standard_scaler": self.standard_scaler,
                 "is_training": self.is_training,
                 "crte_ts": self.crte_ts,
             }
@@ -16,7 +15,6 @@ class BinaryClassifierModel(models.Model):
 
     model_id = models.AutoField(primary_key=True, db_index=True)
     model = PickledObjectField(default="")
-    standard_scaler = PickledObjectField(default="")
 
     is_training = models.BooleanField(default=True)
 
